@@ -11,6 +11,11 @@ jobs:
       # - name: SSH Into server
       - run: |
           echo "${{secrets.SSH_PRIVATE_KEY}}" &> ~/ssh_key
+          mkdir -p /home/runner/.ssh
+          ls /home/runner/.ssh
+          touch /home/runner/.ssh/known_hosts
+          echo "${{secrets.KNOWN_HOSTS}}" &> /home/runner/.ssh/known_hosts
+          chmod 700 /home/runner/.ssh/known_hosts
           ssh -i ~/ssh_key ubuntu@15.207.88.65
           cd CI-CD && git pull origin main
           pnpm install
