@@ -10,7 +10,7 @@ jobs:
     steps:
       # - name: SSH Into server
       - run: |
-          echo ${{secrets.SSH_PRIVATE_KEY}} > ~/ssh_key
+          echo "${{secrets.SSH_PRIVATE_KEY}}" &> ~/ssh_key
           ssh -i ~/ssh_key ubuntu@15.207.88.65
           cd CI-CD && git pull origin main
           pnpm install
